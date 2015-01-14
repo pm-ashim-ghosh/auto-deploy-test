@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# 
+# chkconfig: 3 20 80
+# description: testing
 
 GIT=/usr/bin/git
 ADSERVER_REPO=git@github.com:pm-ashim-ghosh/auto-deploy-test.git
