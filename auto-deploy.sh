@@ -5,9 +5,26 @@ ADSERVER_REPO=git@github.com:pm-ashim-ghosh/auto-deploy-test.git
 # LOCAL_ADSERVER_REPO: Must be absolute path.
 LOCAL_ADSERVER_REPO=/home/kartik.sura/auto-deploy-test
 
-cd "$LOCAL_ADSERVER_REPO" && /
-"$GIT" pull "$ADSERVER_REPO" master && /
-"$GIT" checkout -f
+source /etc/init.d/functions
 
-# Deploy even if checkout fails.
-cd "$LOCAL_ADSERVER_REPO/FastCGI_AdServer" && ./deploy.sh
+case $1 in
+start)
+    cd "$LOCAL_ADSERVER_REPO" && /
+    "$GIT" pull "$ADSERVER_REPO" master && /
+    "$GIT" checkout -f
+
+    # Deploy even if checkout fails.
+    cd "$LOCAL_ADSERVER_REPO/FastCGI_AdServer" && ./deploy.sh
+    ;;
+
+stop)
+    ;;
+
+restart)
+    /etc/init.d/auto-deploy.sh start
+    /etc/init.d/auto-deploy.sh stop
+    ;;
+
+*)
+    ;;
+esac
